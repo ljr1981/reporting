@@ -52,9 +52,9 @@ feature -- Test routines
 			create l_rows.make_empty
 			create l_path.make_from_string ("address_list.csv")
 			create l_dir.make_with_path (l_path)
-			create l_file.make_create_read_write (l_path.name.out)
-			if l_file.count > 0 then
-				l_file.read_stream (l_file.count)
+			create l_file.make_open_read (l_path.name.out)
+			l_file.read_stream (l_file.count)
+			if not l_file.last_string.is_empty then
 				l_csv_list := l_file.last_string.split ('%N')
 			else
 				l_csv_list := ("").split ('%N')
