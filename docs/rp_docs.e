@@ -53,6 +53,12 @@ feature -- In-system
 
 	goal: "[
 		Generate a simple report of made-up addresses into HTML/CSS and then hand-off to wkhtmltopdf -> PDF.
+		
+		DONE: address_list.pdf is now generated from address_list.csv
+		]"
+	goal: "[
+		Create an RP_TABLE class, which produces <table> .. </table> HTML with provided data. This will replace
+		the hacked together table of the address_list_test (above).
 		]"
 
 end
