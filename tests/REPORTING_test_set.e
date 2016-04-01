@@ -38,14 +38,37 @@ feature -- Test routines
 			l_tables,
 			l_table,
 			l_rows: STRING
-			l_list: like randomizer.random_address_hash
+			l_list: READABLE_INDEXABLE [TUPLE [street,name,suffix,city,state,zip: STRING]]
+			l_alt_list: ARRAYED_LIST [TUPLE [street,name,suffix,city,state,zip: STRING]]
 			l_file: PLAIN_TEXT_FILE
+			l_dir: DIRECTORY
+			l_path: PATH
+			l_csv_list,
+			l_csv_line: LIST [STRING]
 		do
 			l_html := html_fragment.twin
 			l_list := randomizer.random_address_hash.twin
 			create l_tables.make_empty
 			create l_table.make_empty
 			create l_rows.make_empty
+			create l_path.make_from_string ("address_list.csv")
+			create l_dir.make_with_path (l_path)
+			if l_dir.exists then
+				create l_file.make_open_read (l_path.name.out)
+				l_file.read_stream (l_file.count)
+				l_csv_list := l_file.last_string.split ('%N')
+				l_file.close
+				create l_alt_list.make (l_csv_list.count)
+				across
+					l_csv_list as ic_csv
+				loop
+					l_csv_line := ic_csv.item.split (',')
+					if l_csv_list.count >= 6 then
+						l_alt_list.force ([l_csv_line [1], l_csv_line [2], l_csv_line [3], l_csv_line [4], l_csv_line [5], l_csv_line [6]])
+					end
+				end
+				l_list := l_alt_list
+			end
 			across
 				l_list as ic
 			loop
@@ -70,6 +93,20 @@ feature -- Test routines
 			l_html.replace_substring_all ("<<REPORT_BODY>>", l_tables)
 			create l_file.make_create_read_write ("address_list.html")
 			l_file.put_string (l_html)
+			l_file.close
+
+			create l_file.make_create_read_write ("address_list.csv")
+			l_file.put_string ("Number,Name,Suffix,City,State,ZIP%N")
+			across
+				l_list as ic
+			loop
+				l_file.put_string (ic.item.street); l_file.put_character (',')
+				l_file.put_string (ic.item.name); l_file.put_character (',')
+				l_file.put_string (ic.item.suffix); l_file.put_character (',')
+				l_file.put_string (ic.item.city); l_file.put_character (',')
+				l_file.put_string (ic.item.state); l_file.put_character (',')
+				l_file.put_string (ic.item.zip); l_file.put_character ('%N')
+			end
 			l_file.close
 		end
 
