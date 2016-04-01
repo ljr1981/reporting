@@ -72,6 +72,7 @@ feature -- Test routines
 				end
 				l_list := l_alt_list
 			else
+				check where_is_csv_file: False end
 				l_list := randomizer.random_address_hash.twin
 			end
 			across
@@ -100,18 +101,18 @@ feature -- Test routines
 			l_file.put_string (l_html)
 			l_file.close
 
-			create l_file.make_create_read_write ("address_list.csv")
-			across
-				l_list as ic
-			loop
-				l_file.put_string (ic.item.street); l_file.put_character (',')
-				l_file.put_string (ic.item.name); l_file.put_character (',')
-				l_file.put_string (ic.item.suffix); l_file.put_character (',')
-				l_file.put_string (ic.item.city); l_file.put_character (',')
-				l_file.put_string (ic.item.state); l_file.put_character (',')
-				l_file.put_string (ic.item.zip); l_file.put_character ('%N')
-			end
-			l_file.close
+--			create l_file.make_create_read_write ("address_list.csv")
+--			across
+--				l_list as ic
+--			loop
+--				l_file.put_string (ic.item.street); l_file.put_character (',')
+--				l_file.put_string (ic.item.name); l_file.put_character (',')
+--				l_file.put_string (ic.item.suffix); l_file.put_character (',')
+--				l_file.put_string (ic.item.city); l_file.put_character (',')
+--				l_file.put_string (ic.item.state); l_file.put_character (',')
+--				l_file.put_string (ic.item.zip); l_file.put_character ('%N')
+--			end
+--			l_file.close
 		end
 
 feature {NONE} -- Implementation
