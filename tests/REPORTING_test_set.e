@@ -53,7 +53,7 @@ feature -- Test routines
 			create l_rows.make_empty
 			create l_path.make_from_string ("address_list.csv")
 			create l_dir.make_with_path (l_path)
-			if l_dir.exists then
+--			if l_dir.exists then
 				create l_file.make_open_read (l_path.name.out)
 				l_file.read_stream (l_file.count)
 				l_csv_list := l_file.last_string.split ('%N')
@@ -63,12 +63,12 @@ feature -- Test routines
 					l_csv_list as ic_csv
 				loop
 					l_csv_line := ic_csv.item.split (',')
-					if l_csv_list.count >= 6 then
+					if l_csv_line.count >= 6 then
 						l_alt_list.force ([l_csv_line [1], l_csv_line [2], l_csv_line [3], l_csv_line [4], l_csv_line [5], l_csv_line [6]])
 					end
 				end
 				l_list := l_alt_list
-			end
+--			end
 			across
 				l_list as ic
 			loop
