@@ -47,17 +47,20 @@ feature -- Test routines
 			l_csv_line: LIST [STRING]
 		do
 			l_html := html_fragment.twin
-			l_list := randomizer.random_address_hash.twin
 			create l_tables.make_empty
 			create l_table.make_empty
 			create l_rows.make_empty
 			create l_path.make_from_string ("address_list.csv")
 			create l_dir.make_with_path (l_path)
---			if l_dir.exists then
-				create l_file.make_open_read (l_path.name.out)
+			create l_file.make_create_read_write (l_path.name.out)
+			if l_file.count > 0 then
 				l_file.read_stream (l_file.count)
 				l_csv_list := l_file.last_string.split ('%N')
-				l_file.close
+			else
+				l_csv_list := ("").split ('%N')
+			end
+			l_file.close
+			if l_csv_list.count > 1 then
 				create l_alt_list.make (l_csv_list.count)
 				across
 					l_csv_list as ic_csv
@@ -68,7 +71,9 @@ feature -- Test routines
 					end
 				end
 				l_list := l_alt_list
---			end
+			else
+				l_list := randomizer.random_address_hash.twin
+			end
 			across
 				l_list as ic
 			loop
@@ -96,7 +101,6 @@ feature -- Test routines
 			l_file.close
 
 			create l_file.make_create_read_write ("address_list.csv")
-			l_file.put_string ("Number,Name,Suffix,City,State,ZIP%N")
 			across
 				l_list as ic
 			loop
