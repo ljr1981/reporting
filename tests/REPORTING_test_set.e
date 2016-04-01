@@ -1,5 +1,7 @@
 note
-	description: "Tests of {REPORTING}."
+	description: "[
+		Tests of {REPORTING}.
+		]"
 	testing: "type/manual"
 
 class

@@ -60,5 +60,27 @@ feature -- In-system
 		Create an RP_TABLE class, which produces <table> .. </table> HTML with provided data. This will replace
 		the hacked together table of the address_list_test (above).
 		]"
+	goal: "[
+		Create an RP_DATA class, which represents the data that will be given to something like RP_TABLE.
+		We might give RP_DATA to an RP_REPORT, which walks over the items in RP_DATA, placing them in as
+		many RP_TABLE items as are needed to process all RP_DATA in RP_REPORT.
+		
+		(1) Grouping: We want data to be grouped, subgrouped, etc based on various columns.
+					The real question is: How do we ID fields upon which to group?
+		(2) Calcs: Various on-the-fly calculations
+			(a) Sum - Total/Running
+			(b) Average - Total/Running
+			(c) Count - Total/Running
+			
+		(3) Agents: Perhaps we want agent-visitors to walk the data first, populating each item with
+					data like running (accumulating) sum, running average, and count?
+		(4) Calc-able: Any column field that can be "added" can potentially benefit from being calc-able.
+					At a minimum, we do NUMERIC.
+		(5) Data-import: How does the data come to the class?
+			(a) CSV
+			(b) Flat-file
+		(6) Sub-RP_DATA: If we have subordinate data in D' to D, where D = RP_DATA, how do we walk the data?
+					Moreover, how do we group/subgroup and keep track of sum, average, count, and so on?
+		]"
 
 end
