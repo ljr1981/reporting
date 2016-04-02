@@ -41,10 +41,10 @@ feature {NONE} -- Initialization
 
 feature -- Access
 
-	table_data: ARRAYED_LIST [RP_DATA_ELEMENT]
+	table_data: ARRAYED_LIST [G]
 			-- `table_data' of Current {RP_DATA_TABLE}.
 		attribute
-			create Result.make (Default_capacity)
+			create Result.make (Table_default_capacity)
 		end
 
 	header: RP_DATA_HEADER
@@ -52,15 +52,6 @@ feature -- Access
 
 feature -- HTML Attributes
 
-	global_accesskey: attached like attribute_tuple_anchor
-		note EIS: "src=http://www.w3schools.com/tags/att_global_accesskey.asp"
-		attribute Result := ["", "", Void, "accesskey", is_quoted] end
-	global_class: attached like attribute_tuple_anchor
-		note EIS: "src=http://www.w3schools.com/tags/att_global_class.asp"
-		attribute Result := ["", "", Void, "class", is_quoted] end
-	global_style: attached like attribute_tuple_anchor
-		note EIS: "src=http://www.w3schools.com/tags/att_global_style.asp"
-		attribute Result := ["", "", Void, "style", is_quoted] end
 	table_border: attached like attribute_tuple_anchor
 		note EIS: "src=http://www.w3schools.com/tags/att_table_border.asp"
 		attribute Result := ["0", "0", Void, "border", is_quoted] end
@@ -69,10 +60,7 @@ feature -- HTML Attributes
 			-- <Precursor>
 			-- HTML attributes for <table>
 		do
-			create Result.make (4)
-			Result.force (global_accesskey, "accesskey")
-			Result.force (global_class, "class")
-			Result.force (global_style, "style")
+			Result := Precursor
 			Result.force (table_border, "border")
 		ensure then
 			count: Result.count >= 4
@@ -113,7 +101,7 @@ feature -- Output
 					table_data as ic_data
 				loop
 					Result.append_string ("<tr>")
-					check attached {RP_DATA_ELEMENT} ic_data.item as al_data_item and then attached {TUPLE} al_data_item.items as al_tuple_items then
+					check attached {G} ic_data.item as al_data_item and then attached {TUPLE} al_data_item.items as al_tuple_items then
 						across
 							al_tuple_items as ic_rows
 						loop
@@ -135,8 +123,8 @@ feature -- Output
 
 feature {NONE} -- Implementation: Constants
 
-	Default_capacity: INTEGER = 1_000
-			-- `Default_capacity' for `table_data'.
+	Table_default_capacity: INTEGER = 1_000
+			-- `Table_default_capacity' for `table_data'.
 
 ;note
 	design: "[
