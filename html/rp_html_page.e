@@ -20,14 +20,11 @@ inherit
 
 feature -- Output
 
-	html_out: STRING
+	html_content: STRING
 			-- <Precursor>
 			-- HTML output for Current {RP_HTML_PAGE}.
 		do
 			create Result.make_empty
-			Result.append_string (start_tag)
-
-			Result.append_string (end_tag)
 		end
 
 	tag_name: STRING = "html"

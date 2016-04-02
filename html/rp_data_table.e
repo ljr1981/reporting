@@ -68,17 +68,11 @@ feature -- HTML Attributes
 
 feature -- Output
 
-	html_out: STRING
+	html_content: STRING
 			-- <Precursor>
 			-- HTML output for Current {RP_DATA_TABLE}.
 		do
 			create Result.make_empty
-			Result.append_string (start_tag)
-			if attached attributes_out as al_attributes_out and then not al_attributes_out.is_empty then
-				Result.replace_substring_all (tag_attributes_tag, " " + al_attributes_out)
-			else
-				Result.replace_substring_all (tag_attributes_tag, create {STRING}.make_empty)
-			end
 
 				-- table header goes here ...
 			if not header.items.is_empty then
@@ -115,8 +109,6 @@ feature -- Output
 					Result.append_string ("</tr>")
 				end
 			end
-
-			Result.append_string (end_tag)
 		end
 
 	tag_name: STRING = "table"

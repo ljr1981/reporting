@@ -41,11 +41,27 @@ feature -- Output
 
 	html_out: STRING
 			-- `html_out' of Current {RP_HTML_TAG}.
-		deferred
+		do
+			create Result.make_empty
+			Result.append_string (start_tag)
+			if attached attributes_out as al_attributes_out and then not al_attributes_out.is_empty then
+				Result.replace_substring_all (tag_attributes_tag, " " + al_attributes_out)
+			else
+				Result.replace_substring_all (tag_attributes_tag, create {STRING}.make_empty)
+			end
+			Result.append_string (html_content)
+			Result.append_string (end_tag)
 		end
 
 	tag_name: STRING
 			-- `tag_name' for `html_out' of Current {RP_HTML_TAG}.
+		deferred
+		end
+
+feature {NONE} -- Implementation
+
+	html_content: like html_out
+			-- `html_content' that goes into `html_out' between `start_tag' and `end_tag'.
 		deferred
 		end
 
@@ -61,5 +77,5 @@ feature {NONE} -- Implementation: Constants
 
 	Default_capacity: INTEGER
 		once ("object") Result := 3 end
-		
+
 end
