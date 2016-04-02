@@ -136,6 +136,7 @@ feature -- Output
 feature {NONE} -- Implementation: Constants
 
 	Default_capacity: INTEGER = 1_000
+			-- `Default_capacity' for `table_data'.
 
 ;note
 	design: "[
