@@ -9,6 +9,9 @@ note
 deferred class
 	RP_DATA_ELEMENT
 
+inherit
+	RP_ANY
+	
 feature {NONE} -- Initialization
 
 	make_with_data (a_data: attached like items_type_anchor; a_header: like header)

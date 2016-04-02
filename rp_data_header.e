@@ -9,6 +9,9 @@ note
 deferred class
 	RP_DATA_HEADER
 
+inherit
+	RP_ANY
+
 feature -- Access
 
 	items: ARRAY [STRING]

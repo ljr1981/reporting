@@ -25,14 +25,6 @@ inherit
 
 feature -- Test routines
 
-	reporting_tests
-			-- `reporting_tests'
-		local
-			l_docs: RP_DOCS
-		do
-			do_nothing -- yet ...
-		end
-
 	address_report_test
 			-- `address_report_test'
 		local
