@@ -66,7 +66,7 @@ feature -- HTML Attributes
 			count: Result.count >= 4
 		end
 
-feature -- Output
+feature {NONE} -- Implementation
 
 	html_content: STRING
 			-- <Precursor>
