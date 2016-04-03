@@ -27,7 +27,6 @@ feature -- Output
 			-- Add notion of `doctype' and other "<head>" items.
 		do
 			Result := doctype.twin
-			-- <head> gets appended here ...
 			Result.append_string (Precursor)
 		end
 
@@ -36,15 +35,42 @@ feature -- Output
 			-- HTML output for Current {RP_HTML_PAGE}.
 		do
 			create Result.make_empty
+			if attached head as al_head then Result.append_string (al_head.html_out) end
+			if attached body as al_body then Result.append_string (al_body.html_out) end
 		end
 
 	tag_name: STRING = "html"
+			-- <Precursor>
+
+feature -- Settings
+
+	set_head (a_head: like head)
+			-- `set_head' with `a_head' into `head'.
+		do
+			head := a_head
+		ensure
+			set: head ~ a_head
+		end
+
+	set_body (a_body: like body)
+			-- `set_body' with `a_body' into `body'.
+		do
+			body := a_body
+		ensure
+			set: body ~ a_body
+		end
 
 feature {NONE} -- Implementation
 
 	doctype: STRING = "<!DOCTYPE html>"
 			-- `doctype' for HTML-5 (not 4.x or XML or other).
 			-- This may (later on) need to be a class.
+
+	head: detachable RP_HTML_HEAD
+			-- `head' of Current {RP_HTML_PAGE}.
+
+	body: detachable RP_HTML_BODY
+			-- `body' of Current {RP_HTML_PAGE}.
 
 ;note
 	design: "[

@@ -1,10 +1,10 @@
 note
 	description: "[
-		Representation of an {RP_HTML_LINK}.
+		Representation of an {RP_HTML_BODY}.
 		]"
 
 class
-	RP_HTML_LINK
+	RP_HTML_BODY
 
 inherit
 	RP_ANY
@@ -19,19 +19,19 @@ feature -- Output
 
 	html_content: STRING
 			-- <Precursor>
-			-- HTML output for Current {RP_HTML_LINK}.
+			-- HTML output for Current {RP_HTML_TITLE}.
 		do
 			create Result.make_empty
 		end
 
-	tag_name: STRING = "link"
+	tag_name: STRING = "body"
 			-- <Precursor>
 
 ;note
 	design: "[
 Tag    Description
-<link>    Defines the relationship between a document and an external resource
+<body>    Defines the body of a document
 		]"
-	EIS: "name=link", "src=http://www.w3schools.com/tags/tag_link.asp"
+	EIS: "name=title", "src=http://www.w3schools.com/tags/tag_body.asp"
 
 end
