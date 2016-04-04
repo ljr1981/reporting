@@ -19,7 +19,7 @@ feature -- Output
 
 	html_content: STRING
 			-- <Precursor>
-			-- HTML output for Current {RP_HTML_BASE}.
+			-- HTML output for Current {RP_HTML_A}.
 		do
 			create Result.make_empty
 		end
