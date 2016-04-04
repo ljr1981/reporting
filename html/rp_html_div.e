@@ -1,10 +1,10 @@
 note
 	description: "[
-		Representation of an {RP_HTML_P}.
+		Representation of an {RP_HTML_DIV}.
 		]"
 
 class
-	RP_HTML_P
+	RP_HTML_DIV
 
 inherit
 	RP_ANY
@@ -19,19 +19,19 @@ feature -- Output
 
 	html_content: STRING
 			-- <Precursor>
-			-- HTML output for Current {RP_HTML_P}.
+			-- HTML output for Current {RP_HTML_DIV}.
 		do
 			create Result.make_empty
 		end
 
-	tag_name: STRING = "p"
+	tag_name: STRING = "div"
 			-- <Precursor>
 
 ;note
 	design: "[
 Tag    Description
-<p>    Defines a paragraph
+<div>    Defines a division or a section in an HTML document
 		]"
-	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_p.asp"
+	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_div.asp"
 
 end
