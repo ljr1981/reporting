@@ -1,10 +1,10 @@
 note
 	description: "[
-		Representation of an {RP_HTML_DIV}.
+		Representation of an {RP_HTML_INPUT}.
 		]"
 
 class
-	RP_HTML_DIV
+	RP_HTML_INPUT
 
 inherit
 	RP_ANY
@@ -19,19 +19,19 @@ feature -- Output
 
 	html_content: STRING
 			-- <Precursor>
-			-- HTML output for Current {RP_HTML_DIV}.
+			-- HTML output for Current {RP_HTML_INPUT}.
 		do
 			create Result.make_empty
 		end
 
-	tag_name: STRING = "form"
+	tag_name: STRING = "input"
 			-- <Precursor>
 
 ;note
 	design: "[
 Tag    Description
-<div>    Defines a division or a section in an HTML document
+<input>    Specifies an input field where the user can enter data
 		]"
-	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_div.asp"
+	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_input.asp"
 
 end
