@@ -19,7 +19,22 @@ inherit
 			default_create,
 			out
 		redefine
-			html_out
+			html_out,
+			make_with_content
+		end
+
+create
+	default_create,
+	make_with_content
+
+feature {NONE} -- Initialization
+
+	make_with_content (a_content: ARRAY [attached like content_anchor])
+			-- <Precursor>
+		do
+			check has_body: attached (create {RP_HTML_BODY}.make_with_content (a_content)) as al_body then
+				body := al_body
+			end
 		end
 
 feature -- Output
@@ -75,7 +90,7 @@ feature {NONE} -- Implementation
 			-- `body' of Current {RP_HTML_PAGE}.
 
 invariant
-	no_content: html_content_items.count = 0 -- all in `head' and `body'.
+	no_content: html_content_items.count = 0
 
 ;note
 	design: "[

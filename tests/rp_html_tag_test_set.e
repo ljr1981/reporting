@@ -83,6 +83,7 @@ feature -- Test routines
 			l_h1: RP_HTML_H1
 			l_h2: RP_HTML_H2
 			l_h3: RP_HTML_H3
+			l_page: RP_HTML_PAGE
 		do
 			create l_a
 			create l_br
@@ -99,6 +100,10 @@ feature -- Test routines
 
 			create l_h1.make_with_content (<<create {RP_HTML_H2}.make_with_content (<<create {RP_HTML_H3}>>)>>)
 			assert_strings_equal ("h1_h2_h3", "<h1><h2><h3></h3></h2></h1>", l_h1.html_out)
+
+			create l_page.make_with_content (<<l_a, l_br, l_div, l_footer, l_form, l_h1>>)
+			l_page.set_head (create {RP_HTML_HEAD})
+			assert_strings_equal ("page", "<!DOCTYPE html><html><head></head><body><a></a><br></br><div></div><footer></footer><div></div><h1><h2><h3></h3></h2></h1></body></html>", l_page.html_out)
 		end
 
 end

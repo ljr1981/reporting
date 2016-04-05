@@ -23,8 +23,6 @@ feature {NONE} -- Initialization
 			loop
 				html_content_items.force (ic_content.item)
 			end
-		ensure
-			same_count: html_content_items.count >= a_content.count
 		end
 
 feature -- Attributes

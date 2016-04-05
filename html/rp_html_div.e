@@ -28,7 +28,7 @@ feature -- Output
 			create Result.make_empty
 		end
 
-	tag_name: STRING = "form"
+	tag_name: STRING = "div"
 			-- <Precursor>
 
 ;note
