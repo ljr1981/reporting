@@ -24,7 +24,7 @@ feature {NONE} -- Initialization
 				html_content_items.force (ic_content.item)
 			end
 		ensure
-			set: across a_content as ic_content all html_content_items.has (ic_content.item) end
+			same_count: html_content_items.count >= a_content.count
 		end
 
 feature -- Attributes
@@ -53,7 +53,7 @@ feature -- Attributes
 
 	html_content_items: ARRAYED_LIST [attached like content_anchor]
 			-- `html_content_items' for Current {RP_HTML_TAG}
-		do
+		attribute
 			create Result.make (Default_capacity)
 		end
 

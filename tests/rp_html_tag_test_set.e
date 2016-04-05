@@ -92,6 +92,13 @@ feature -- Test routines
 			create l_h1
 			create l_h2
 			create l_h3
+
+			l_h1.html_content_items.force (l_h2)
+			l_h2.html_content_items.force (l_h3)
+			assert_strings_equal ("h1_h2_h3", "<h1><h2><h3></h3></h2></h1>", l_h1.html_out)
+
+			create l_h1.make_with_content (<<create {RP_HTML_H2}.make_with_content (<<create {RP_HTML_H3}>>)>>)
+			assert_strings_equal ("h1_h2_h3", "<h1><h2><h3></h3></h2></h1>", l_h1.html_out)
 		end
 
 end
