@@ -37,6 +37,12 @@ feature -- Attributes
 			count: Result.count >= Default_capacity
 		end
 
+	content_list: ARRAYED_LIST [RP_HTML_TAG]
+			-- `content_list' for Current {RP_HTML_TAG}
+		do
+			create Result.make (Default_capacity)
+		end
+
 feature -- Output
 
 	html_out: STRING
