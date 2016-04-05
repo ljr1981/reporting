@@ -13,6 +13,8 @@ inherit
 	RP_ANY
 
 	RP_HTML_TAG
+		export {NONE}
+			html_content_items
 		undefine
 			default_create,
 			out
@@ -71,6 +73,9 @@ feature {NONE} -- Implementation
 
 	body: detachable RP_HTML_BODY
 			-- `body' of Current {RP_HTML_PAGE}.
+
+invariant
+	no_content: html_content_items.count = 0 -- all in `head' and `body'.
 
 ;note
 	design: "[

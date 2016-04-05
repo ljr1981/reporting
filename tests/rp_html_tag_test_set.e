@@ -72,6 +72,14 @@ feature -- Test routines
 			assert_strings_equal ("html_page", "<!DOCTYPE html><html><head><title></title><base></base><link></link><meta></meta><script></script><style></style></head><body></body></html>", l_html.html_out)
 		end
 
+	general_html_tag_creation_tests
+			-- `general_html_tag_creation_tests'.
+		local
+			l_a: RP_HTML_A
+		do
+			create l_a
+		end
+
 end
 
 
