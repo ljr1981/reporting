@@ -1,10 +1,10 @@
 note
 	description: "[
-		Representation of an {RP_HTML_IMG}.
+		Representation of an {RP_HTML_H1}.
 		]"
 
 class
-	RP_HTML_IMG
+	RP_HTML_H1
 
 inherit
 	RP_ANY
@@ -19,19 +19,19 @@ feature -- Output
 
 	html_content: STRING
 			-- <Precursor>
-			-- HTML output for Current {RP_HTML_IMG}.
+			-- HTML output for Current {RP_HTML_H1}.
 		do
 			create Result.make_empty
 		end
 
-	tag_name: STRING = "img"
+	tag_name: STRING = "h1"
 			-- <Precursor>
 
 ;note
 	design: "[
 Tag    Description
-<img>    Defines an image in an HTML page
+<h1>    used to define HTML heading
 		]"
-	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_img.asp"
+	EIS: "name=base", "src=http://www.w3schools.com/tags/tag_hn.asp"
 
 end
