@@ -76,8 +76,22 @@ feature -- Test routines
 			-- `general_html_tag_creation_tests'.
 		local
 			l_a: RP_HTML_A
+			l_br: RP_HTML_BR
+			l_div: RP_HTML_DIV
+			l_footer: RP_HTML_FOOTER
+			l_form: RP_HTML_FORM
+			l_h1: RP_HTML_H1
+			l_h2: RP_HTML_H2
+			l_h3: RP_HTML_H3
 		do
 			create l_a
+			create l_br
+			create l_div
+			create l_footer
+			create l_form
+			create l_h1
+			create l_h2
+			create l_h3
 		end
 
 end

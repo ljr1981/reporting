@@ -14,6 +14,10 @@ inherit
 			default_create,
 			out
 		end
+		
+create
+	default_create,
+	make_with_content
 
 feature -- Output
 
