@@ -10,6 +10,7 @@
 		<library name="base" location="$ISE_LIBRARY\library\base\base-safe.ecf"/>
 		<library name="framework" location="$GITHUB\framework\framework.ecf"/>
 		<library name="graphviz" location="$GITHUB\graphviz\graphviz.ecf"/>
+		<library name="html" location="$GITHUB\html\html.ecf"/>
 		<library name="logging_extension" location="$GITHUB\logging_extension\logging_extension.ecf"/>
 		<library name="process" location="$ISE_LIBRARY\library\process\process-safe.ecf"/>
 		<library name="pub_sub" location="$GITHUB\pub_sub\pub_sub.ecf"/>

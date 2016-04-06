@@ -23,14 +23,4 @@ inherit
 			default_create
 		end
 
-feature {NONE} -- In-system
-
-	html_base: detachable RP_HTML_BASE
-	html_head: detachable RP_HTML_HEAD
-	html_link: detachable RP_HTML_LINK
-	html_meta: detachable RP_HTML_META
-	html_script: detachable RP_HTML_SCRIPT
-	html_style: detachable RP_HTML_STYLE
-	html_title: detachable RP_HTML_TITLE
-
 end

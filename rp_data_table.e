@@ -12,7 +12,7 @@ class
 inherit
 	RP_ANY
 
-	RP_HTML_TAG
+	HTML_TAG
 		undefine
 			default_create,
 			out
