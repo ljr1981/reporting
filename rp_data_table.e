@@ -12,12 +12,14 @@ class
 inherit
 	RP_ANY
 
-	HTML_TAG
+	HTML_TABLE
+		rename
+			documentation as html_documentation
 		undefine
 			default_create,
 			out
 		redefine
-			attribute_list
+			html_content
 		end
 
 create
@@ -49,22 +51,6 @@ feature -- Access
 
 	header: RP_DATA_HEADER
 			-- `header' for `table_data' of Current {RP_DATA_TABLE}.
-
-feature -- HTML Attributes
-
-	table_border: attached like attribute_tuple_anchor
-		note EIS: "src=http://www.w3schools.com/tags/att_table_border.asp"
-		attribute Result := ["0", "0", Void, "border", is_quoted] end
-
-	attribute_list: HASH_TABLE [attached like attribute_tuple_anchor, STRING]
-			-- <Precursor>
-			-- HTML attributes for <table>
-		do
-			Result := Precursor
-			Result.force (table_border, "border")
-		ensure then
-			count: Result.count >= 4
-		end
 
 feature {NONE} -- Implementation
 
@@ -110,8 +96,6 @@ feature {NONE} -- Implementation
 				end
 			end
 		end
-
-	tag_name: STRING = "table"
 
 feature {NONE} -- Implementation: Constants
 
