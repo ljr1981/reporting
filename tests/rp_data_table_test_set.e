@@ -31,15 +31,36 @@ feature -- Test routines
 	rp_data_table_basic_tests
 			-- `rp_data_table_basic_tests'
 		local
+			l_page: HTML_PAGE
+			l_head: HTML_HEAD
+			l_style: HTML_STYLE
 			l_table: RP_DATA_TABLE [MOCK_DATA_ITEM]
 		do
+
 			create l_table.make_with_data (<<["2707", "AIMAR", "AVE", "SAVANNAH", "GA", "31406"], ["2709", "AIMAR", "AVE", "SAVANNAH", "GA", "31406"]>>, create {MOCK_DATA_HEADER})
-			assert_strings_equal ("two_addresses", two_addresses, l_table.html_out)
+
+			assert_strings_equal ("two_addresses_table", two_addresses_table, l_table.html_out)
+
+			l_table.style_rule.border.attr_value := "1px solid black"
+			l_table.style_rule.border_collapse.attr_value := "collapse"
+			l_table.style_rule.page_break_inside.attr_value := "avoid"
+
+			create l_page
+			create l_head
+			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
+
+			l_page.set_head (l_head)
+			l_head.set_style (l_style)
+			l_page.add_content (l_table)
+
+			assert_strings_equal ("two_addresses_page_with_style", two_addresses_page_with_style, l_page.html_out)
 		end
 
 feature {NONE} -- Support
 
-	two_addresses: STRING = "<table><tr><th>Number</th><th>Name</th><th>Suffix</th><th>City</th><th>State</th><th>ZIP</th></tr><tr><td>2707</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr><tr><td>2709</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr></table>"
+	two_addresses_table: STRING = "<table><tr><th>Number</th><th>Name</th><th>Suffix</th><th>City</th><th>State</th><th>ZIP</th></tr><tr><td>2707</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr><tr><td>2709</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr></table>"
+
+	two_addresses_page_with_style: STRING = "<!DOCTYPE html><html><head><style>{border:1px solid black; border-collapse:collapse; page-break-inside:avoid;}</style></head><body><table><tr><th>Number</th><th>Name</th><th>Suffix</th><th>City</th><th>State</th><th>ZIP</th></tr><tr><td>2707</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr><tr><td>2709</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr></table></body></html>"
 
 feature -- Test routines
 
