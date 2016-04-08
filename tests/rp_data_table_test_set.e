@@ -56,6 +56,37 @@ feature -- Test routines
 			assert_strings_equal ("two_addresses_page_with_style", two_addresses_page_with_style, l_page.html_out)
 		end
 
+	address_report_tests_2
+			-- `address_report_tests_2'
+		local
+			l_page: HTML_PAGE
+			l_head: HTML_HEAD
+			l_style: HTML_STYLE
+			l_table: RP_DATA_TABLE [MOCK_DATA_ITEM]
+
+			l_file: PLAIN_TEXT_FILE
+		do
+
+			create l_table.make_with_data (randomizer.random_addresses_as_array (900 |..| 1_000), create {MOCK_DATA_HEADER})
+
+			l_table.style_rule.selectors.force ("table, th, td")
+			l_table.style_rule.border.attr_value := "1px solid black"
+			l_table.style_rule.border_collapse.attr_value := "collapse"
+			l_table.style_rule.page_break_inside.attr_value := "avoid"
+
+			create l_page
+			create l_head
+			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
+
+			l_page.set_head (l_head)
+			l_head.set_style (l_style)
+			l_page.add_content (l_table)
+
+			create l_file.make_create_read_write ("address_list_2.html")
+			l_file.put_string (l_page.html_out)
+			l_file.close
+		end
+
 feature {NONE} -- Support
 
 	two_addresses_table: STRING = "<table><tr><th>Number</th><th>Name</th><th>Suffix</th><th>City</th><th>State</th><th>ZIP</th></tr><tr><td>2707</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr><tr><td>2709</td><td>AIMAR</td><td>AVE</td><td>SAVANNAH</td><td>GA</td><td>31406</td></tr></table>"
