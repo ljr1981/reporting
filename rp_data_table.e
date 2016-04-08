@@ -61,25 +61,18 @@ feature {NONE} -- Implementation
 			create Result.make_empty
 
 				-- table header goes here ...
-			if not header.items.is_empty then
-				Result.append_string ("<tr>")
-				across
-					header.items as ic
-				loop
-					Result.append_string ("<th>")
-					check has_header_string: attached {STRING} ic.item as al_item then
-						Result.append_string (al_item)
-					end
-					Result.append_string ("</th>")
-				end
-				Result.append_string ("</tr>")
-			end
 
 				-- table data goes here ...
 			if not table_data.is_empty then
+				Result.append_string (page_break)
 				across
 					table_data as ic_data
 				loop
+					if ic_data.cursor_index \\ Rows_per_page = 0 then
+						Result.append_string ("</table>")
+						Result.append_string ("<table>")
+						Result.append_string (page_break)
+					end
 					Result.append_string ("<tr>")
 					check attached {G} ic_data.item as al_data_item and then attached {TUPLE} al_data_item.items as al_tuple_items then
 						across
@@ -97,10 +90,32 @@ feature {NONE} -- Implementation
 			end
 		end
 
+	page_break: STRING
+			-- `page_break'.
+		do
+			create Result.make_empty
+			if not header.items.is_empty then
+				Result.append_string ("<tr>")
+				across
+					header.items as ic
+				loop
+					Result.append_string ("<th>")
+					check has_header_string: attached {STRING} ic.item as al_item then
+						Result.append_string (al_item)
+					end
+					Result.append_string ("</th>")
+				end
+				Result.append_string ("</tr>")
+			end
+		end
+
 feature {NONE} -- Implementation: Constants
 
 	Table_default_capacity: INTEGER = 1_000
 			-- `Table_default_capacity' for `table_data'.
+
+	Rows_per_page: INTEGER = 52
+			-- `Rows_per_page' constant.
 
 ;note
 	design: "[
