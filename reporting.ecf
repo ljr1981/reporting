@@ -8,6 +8,7 @@
 		</option>
 		<setting name="console_application" value="true"/>
 		<library name="base" location="$ISE_LIBRARY\library\base\base-safe.ecf"/>
+		<library name="css" location="$GITHUB\css\css.ecf"/>
 		<library name="framework" location="$GITHUB\framework\framework.ecf"/>
 		<library name="graphviz" location="$GITHUB\graphviz\graphviz.ecf"/>
 		<library name="html" location="$GITHUB\html\html.ecf"/>

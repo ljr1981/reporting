@@ -19,7 +19,7 @@ inherit
 			default_create,
 			out
 		redefine
-			html_content
+			html_out
 		end
 
 create
@@ -52,14 +52,23 @@ feature -- Access
 	header: RP_DATA_HEADER
 			-- `header' for `table_data' of Current {RP_DATA_TABLE}.
 
-feature {NONE} -- Implementation
+feature -- Output
 
-	html_content: STRING
+	html_out: STRING
 			-- <Precursor>
 			-- HTML output for Current {RP_DATA_TABLE}.
 		do
 			create Result.make_empty
 
+				-- Start tag ...
+			Result.append_string (start_tag)
+
+				-- Tag attributes ...
+			if attached attributes_out as al_attributes_out and then not al_attributes_out.is_empty then
+				Result.replace_substring_all (tag_attributes_tag, " " + al_attributes_out)
+			else
+				Result.replace_substring_all (tag_attributes_tag, create {STRING}.make_empty)
+			end
 				-- table header goes here ...
 
 				-- table data goes here ...
@@ -88,7 +97,12 @@ feature {NONE} -- Implementation
 					Result.append_string ("</tr>")
 				end
 			end
+			
+				-- End tag ...
+			Result.append_string (end_tag)
 		end
+
+feature {NONE} -- Implementation
 
 	page_break: STRING
 			-- `page_break'.
