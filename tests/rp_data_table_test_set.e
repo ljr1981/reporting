@@ -50,7 +50,7 @@ feature -- Test routines
 			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
 
 			l_page.set_head (l_head)
-			l_head.set_style (l_style)
+			l_head.set_style_tag (l_style)
 			l_page.add_content (l_table)
 
 			assert_strings_equal ("two_addresses_page_with_style", two_addresses_page_with_style, l_page.html_out)
@@ -79,7 +79,7 @@ feature -- Test routines
 			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
 
 			l_page.set_head (l_head)
-			l_head.set_style (l_style)
+			l_head.set_style_tag (l_style)
 			l_page.add_content (l_table)
 
 			create l_file.make_create_read_write ("address_list_2.html")
