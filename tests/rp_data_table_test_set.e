@@ -49,7 +49,7 @@ feature -- Test routines
 			create l_head
 			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
 
-			l_page.set_head (l_head)
+--			l_page.set_head (l_head) -- TODO: Why am I being created?
 			l_head.add_content (l_style)
 			l_page.add_content (l_table)
 
@@ -78,7 +78,7 @@ feature -- Test routines
 			create l_head
 			create l_style.make_with_content (<<create {HTML_TEXT}.make_with_text (l_table.style_out)>>)
 
-			l_page.set_head (l_head)
+--			l_page.set_head (l_head) -- TODO: Why am I being created?
 			l_head.add_content (l_style)
 			l_page.add_content (l_table)
 
